@@ -21,24 +21,25 @@ data3 = {
 response1 = requests.get(url1, params=params1)
 response1_json = response1.json()
 
-response2 = requests.get(url2, params=params2)
-response2_json = response2.json()
-
-response3 = requests.post(url3, data=data3)
-response3_json = response3.json()
-
 print("Результат задания 1:")
 print(f"Статус-код: {response1.status_code}")
 print(f"JSON-формат: ")
 pprint.pprint(response1_json)
 print()
 
-print("Результат задания 2:")
-print(f"Статус-код: {response2.status_code}")
-print(f"JSON-формат: ")
-pprint.pprint(response2_json)
+response2 = requests.get(url2, params=params2)
+if response2.status_code == 200:
+    posts = response2.json()
+    print("Результат задания 2:")
+    for post in posts:
+        print(post)
+    else:
+        print("Ошибка")
 print()
 
+response3 = requests.post(url3, data=data3)
+response3_json = response3.json()
+
 print("Результат задания 3:")
-print(f"Статус-код: {response2.status_code}")
+print(f"Статус-код: {response3.status_code}")
 print(f"Ответ: {response3_json}")
